@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Axe RH Strategy</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --or: #C9A84C;
+  --or-light: #F5EDD6;
+  --or-mid: #A07830;
+  --creme: #FAF8F3;
+  --dark: #1A1A1A;
+  --mid: #555;
+  --light: #999;
+  --border: #E8E2D4;
+  --vert: #2D6A4F;
+  --vert-light: #D8EEE3;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: var(--creme); color: var(--dark); }
+.page { max-width: 860px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 4rem 1rem 3rem;
+  border-bottom: 1px solid var(--border);
+}
+.hero .eyebrow {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--or-mid);
+  margin-bottom: 1.25rem;
+}
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 6vw, 56px);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--dark);
+  margin-bottom: 1.5rem;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--or-mid);
+}
+.hero .lead {
+  font-size: 16px;
+  color: var(--mid);
+  line-height: 1.8;
+  max-width: 560px;
+  margin: 0 auto 1rem;
+  font-weight: 300;
+}
+.hero .signature {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  font-style: italic;
+  color: var(--or-mid);
+  margin-top: 1.5rem;
+}
+.divider {
+  width: 40px;
+  height: 1px;
+  background: var(--or);
+  margin: 1.5rem auto;
+}
+
+/* CIBLES */
+.cibles {
+  padding: 3rem 0 2.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.cibles-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--light);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.cibles-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+.cible-tag {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  padding: 8px 20px;
+  font-size: 13px;
+  color: var(--mid);
+  font-weight: 400;
+}
+
+/* SERVICES */
+.services {
+  padding: 3rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.section-eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--or-mid);
+  margin-bottom: 0.5rem;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 2rem;
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.service-card {
+  background: var(--creme);
+  padding: 1.75rem;
+}
+.service-card:hover { background: #fff; }
+.service-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  color: var(--or);
+  margin-bottom: 10px;
+  display: block;
+}
+.service-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 8px;
+}
+.service-card p {
+  font-size: 13px;
+  color: var(--mid);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+/* ENTREPRISES */
+.entreprises {
+  padding: 3rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.entreprises-inner {
+  background: var(--dark);
+  border-radius: 12px;
+  padding: 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.entreprises-inner .left { flex: 1; }
+.entreprises-inner .left p {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--or);
+  margin-bottom: 0.75rem;
+}
+.entreprises-inner .left h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.3;
+}
+.entreprises-inner .right {
+  font-size: 13px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.8;
+  max-width: 280px;
+  font-weight: 300;
+}
+
+/* CTA */
+.cta {
+  padding: 3rem 0 0;
+  text-align: center;
+}
+.cta h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 0.75rem;
+}
+.cta p {
+  font-size: 14px;
+  color: var(--mid);
+  margin-bottom: 1.75rem;
+  font-weight: 300;
+}
+.cta-btn {
+  display: inline-block;
+  background: var(--dark);
+  color: #fff;
+  text-decoration: none;
+  padding: 14px 36px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: background 0.2s;
+  margin-right: 12px;
+}
+.cta-btn:hover { background: #333; }
+.cta-btn.secondary {
+  background: transparent;
+  color: var(--or-mid);
+  border: 1px solid var(--or);
+  margin-right: 0;
+}
+.cta-btn.secondary:hover { background: var(--or-light); }
+
+footer {
+  text-align: center;
+  padding: 2.5rem 0 0;
+  font-size: 12px;
+  color: var(--light);
+  border-top: 1px solid var(--border);
+  margin-top: 3rem;
+}
+footer a { color: var(--or-mid); text-decoration: none; }
+
+@media (max-width: 600px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .entreprises-inner { flex-direction: column; gap: 1rem; }
+  .entreprises-inner .right { max-width: 100%; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="eyebrow">Axe RH Strategy</div>
+    <h1>Vous préparez votre avenir.<br><em>Je vous donne les clés.</em></h1>
+    <div class="divider"></div>
+    <p class="lead">Consultante RH senior, j'accompagne étudiants, bacheliers, jeunes diplômés et candidats en première expérience à décoder le marché du travail — de la candidature jusqu'au poste décroché.</p>
+    <p class="signature">Ce que les recruteurs regardent vraiment — je le sais. Je vous le transmets.</p>
+  </div>
+
+  <!-- CIBLES -->
+  <div class="cibles">
+    <div class="cibles-label">Vous êtes</div>
+    <div class="cibles-grid">
+      <span class="cible-tag">Étudiant</span>
+      <span class="cible-tag">Bachelier</span>
+      <span class="cible-tag">Jeune diplômé</span>
+      <span class="cible-tag">Stagiaire</span>
+      <span class="cible-tag">Candidat en première expérience</span>
+      <span class="cible-tag">En reconversion</span>
+      <span class="cible-tag">En mobilité internationale</span>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="services">
+    <div class="section-eyebrow">Nos accompagnements</div>
+    <div class="section-title">Ce que nous faisons ensemble</div>
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-num">01</span>
+        <h3>Orientation & Campus France</h3>
+        <p>Constituez un dossier solide, préparez votre entretien et posez les bonnes bases pour votre projet d'études.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-num">02</span>
+        <h3>CV & Entretien</h3>
+        <p>Optimisation de votre profil, simulation d'entretien aux codes du marché français, feedback expert.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-num">03</span>
+        <h3>Mobilité internationale</h3>
+        <p>Accompagnement personnalisé pour construire et réussir votre projet de vie et de carrière à l'international.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-num">04</span>
+        <h3>Coaching carrière</h3>
+        <p>Repositionnement, reconversion, plan d'action — nous construisons ensemble une stratégie adaptée à vos ambitions.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENTREPRISES -->
+  <div class="entreprises">
+    <div class="entreprises-inner">
+      <div class="left">
+        <p>Pour les entreprises</p>
+        <h3>Structuration RH,<br>recrutement & conformité sociale</h3>
+      </div>
+      <div class="right">
+        Intervention senior en mode conseil — pour les entreprises qui souhaitent structurer leur fonction RH, recruter efficacement et sécuriser leur conformité sociale.
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <h2>Prêt à passer à l'action ?</h2>
+    <p>Prenons le temps d'un échange pour définir ensemble la meilleure stratégie.</p>
+    <a href="https://www.axe-rh-strategy.com/contact-prise-de-rendez-vous" class="cta-btn">Prendre rendez-vous →</a>
+    <a href="https://www.axe-rh-strategy.com/coach-entretien" class="cta-btn secondary">Tester le coach entretien</a>
+  </div>
+
+  <footer>
+    <p>© 2026 <a href="https://www.axe-rh-strategy.com">Axe RH Strategy</a> — Coaching & Conseil RH</p>
+  </footer>
+
+</div>
+</body>
+</html>
