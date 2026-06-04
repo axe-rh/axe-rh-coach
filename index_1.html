@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coach Entretien — Axe RH Strategy</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --or: #C9A84C;
+  --or-light: #F5EDD6;
+  --creme: #FAF8F3;
+  --dark: #1A1A1A;
+  --mid: #555;
+  --light: #999;
+  --border: #E8E2D4;
+  --vert: #2D6A4F;
+  --vert-light: #D8EEE3;
+  --rouge: #8B2E2E;
+  --rouge-light: #F5DEDE;
+  --or-mid: #A07830;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--creme);
+  color: var(--dark);
+  min-height: 100vh;
+}
+.page { max-width: 780px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+/* HEADER */
+.site-header {
+  text-align: center;
+  padding: 2.5rem 0 2rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2.5rem;
+}
+.site-header .brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 4px;
+  color: var(--or-mid);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.site-header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--dark);
+  line-height: 1.2;
+}
+.site-header p {
+  font-size: 14px;
+  color: var(--mid);
+  margin-top: 8px;
+  font-weight: 300;
+}
+
+/* SCREENS */
+.screen { display: none; }
+.screen.active { display: block; }
+
+/* WELCOME */
+.welcome-intro {
+  text-align: center;
+  padding: 1rem 0 2rem;
+}
+.welcome-intro p {
+  font-size: 15px;
+  color: var(--mid);
+  line-height: 1.8;
+  max-width: 540px;
+  margin: 0 auto 2rem;
+}
+.how-it-works {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 2.5rem;
+}
+.step {
+  background: #fff;
+  padding: 1.5rem 1.25rem;
+  text-align: center;
+}
+.step .num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--or);
+  display: block;
+  margin-bottom: 6px;
+}
+.step p { font-size: 13px; color: var(--mid); line-height: 1.6; }
+
+/* SECTOR */
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  color: var(--dark);
+}
+.sector-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 2rem;
+}
+.sector-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+.sector-card:hover { border-color: var(--or); background: var(--or-light); }
+.sector-card.selected { border-color: var(--or); background: var(--or-light); box-shadow: 0 0 0 2px var(--or); }
+.sector-card .icon { font-size: 22px; margin-bottom: 8px; display: block; }
+.sector-card strong { font-size: 15px; font-weight: 500; display: block; margin-bottom: 3px; }
+.sector-card span { font-size: 12px; color: var(--light); }
+
+/* CHAT */
+.progress-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 1.5rem;
+}
+.progress-bar .bar {
+  flex: 1;
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-bar .bar-fill {
+  height: 100%;
+  background: var(--or);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+.progress-bar .prog-label {
+  font-size: 12px;
+  color: var(--light);
+  white-space: nowrap;
+}
+.phase-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--or-mid);
+  background: var(--or-light);
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 1.25rem;
+}
+.question-box {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--or);
+  border-radius: 0 10px 10px 0;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.question-box .recruiter-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--light);
+  margin-bottom: 8px;
+}
+.question-box p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--dark);
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+}
+.tip-box {
+  background: var(--or-light);
+  border: 1px solid #E8D5A0;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  display: none;
+}
+.tip-box.visible { display: block; }
+.tip-box .tip-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--or-mid);
+  margin-bottom: 6px;
+}
+.tip-box p { font-size: 13px; color: var(--dark); line-height: 1.7; }
+textarea#reponse {
+  width: 100%;
+  min-height: 120px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--dark);
+  background: #fff;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s;
+  margin-bottom: 1rem;
+}
+textarea#reponse:focus { border-color: var(--or); }
+.char-count { font-size: 12px; color: var(--light); text-align: right; margin-top: -8px; margin-bottom: 1rem; }
+.btn-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--dark);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 28px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-primary:hover { background: #333; }
+.btn-secondary {
+  background: transparent;
+  color: var(--mid);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-secondary:hover { border-color: var(--or); color: var(--or-mid); }
+.btn-gold {
+  background: var(--or-light);
+  color: var(--or-mid);
+  border: 1px solid #E8D5A0;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-gold:hover { background: #EFE0B0; }
+
+/* FEEDBACK */
+.feedback-box {
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.25rem;
+}
+.feedback-box.good { background: var(--vert-light); border: 1px solid #A8D5BC; }
+.feedback-box.warn { background: var(--or-light); border: 1px solid #E8D5A0; }
+.feedback-box.bad { background: var(--rouge-light); border: 1px solid #D9AAAA; }
+.feedback-box .fb-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.feedback-box.good .fb-label { color: var(--vert); }
+.feedback-box.warn .fb-label { color: var(--or-mid); }
+.feedback-box.bad .fb-label { color: var(--rouge); }
+.feedback-box p { font-size: 14px; line-height: 1.7; color: var(--dark); }
+.model-answer {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--vert);
+  border-radius: 0 10px 10px 0;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.model-answer .ma-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--vert);
+  margin-bottom: 8px;
+}
+.model-answer p { font-size: 13px; line-height: 1.8; color: var(--dark); }
+
+/* RESULTS */
+.results-header {
+  text-align: center;
+  padding: 1rem 0 2rem;
+}
+.results-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.results-header p { font-size: 14px; color: var(--mid); }
+.score-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 2rem;
+}
+.score-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem;
+  text-align: center;
+}
+.score-card .sc-label { font-size: 12px; color: var(--light); margin-bottom: 8px; }
+.score-card .sc-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.score-card .sc-bar {
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.score-card .sc-bar-fill { height: 100%; border-radius: 2px; transition: width 0.8s ease; }
+.sc-val.good, .sc-bar-fill.good { color: var(--vert); background: var(--vert); }
+.sc-val.avg { color: var(--or-mid); }
+.sc-bar-fill.avg { background: var(--or); }
+.sc-val.low { color: var(--rouge); }
+.sc-bar-fill.low { background: var(--rouge); }
+.global-score {
+  background: var(--dark);
+  color: #fff;
+  border-radius: 12px;
+  padding: 1.75rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+.global-score .gs-label { font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 4px; }
+.global-score .gs-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 600;
+  color: var(--or);
+  line-height: 1;
+}
+.global-score .gs-verdict { font-size: 14px; color: rgba(255,255,255,0.85); max-width: 340px; line-height: 1.6; }
+.conseils-section { margin-bottom: 2rem; }
+.conseils-section h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.conseil-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.conseil-item:last-child { border-bottom: none; }
+.conseil-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--or-light);
+  color: var(--or-mid);
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.conseil-item p { font-size: 14px; line-height: 1.7; color: var(--dark); }
+.cta-section {
+  text-align: center;
+  padding: 2rem;
+  background: var(--or-light);
+  border: 1px solid #E8D5A0;
+  border-radius: 12px;
+  margin-top: 2rem;
+}
+.cta-section p { font-size: 14px; color: var(--mid); margin-bottom: 1.25rem; line-height: 1.7; }
+.cta-section a {
+  display: inline-block;
+  background: var(--dark);
+  color: #fff;
+  text-decoration: none;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+.cta-section a:hover { background: #333; }
+
+footer {
+  text-align: center;
+  padding: 2rem 0 0;
+  font-size: 12px;
+  color: var(--light);
+  border-top: 1px solid var(--border);
+  margin-top: 3rem;
+}
+footer a { color: var(--or-mid); text-decoration: none; }
+
+@media (max-width: 600px) {
+  .how-it-works { grid-template-columns: 1fr; }
+  .sector-grid { grid-template-columns: 1fr; }
+  .score-grid { grid-template-columns: repeat(2, 1fr); }
+  .global-score { flex-direction: column; gap: 1rem; }
+  .site-header h1 { font-size: 28px; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="site-header">
+    <div class="brand">Axe RH Strategy</div>
+    <h1>Coach Entretien</h1>
+    <p>Simulez un entretien réel · Recevez un feedback expert · Progressez vite</p>
+  </div>
+
+  <!-- SCREEN 1 : WELCOME -->
+  <div class="screen active" id="screen-welcome">
+    <div class="welcome-intro">
+      <p>Ce coach vous prépare aux codes du marché français. Choisissez votre secteur, répondez aux questions comme en conditions réelles, et recevez un bilan honnête avec des conseils actionnables.</p>
+    </div>
+    <div class="how-it-works">
+      <div class="step"><span class="num">1</span><p>Choisissez votre secteur cible</p></div>
+      <div class="step"><span class="num">2</span><p>Répondez à 4 questions clés</p></div>
+      <div class="step"><span class="num">3</span><p>Recevez votre bilan détaillé</p></div>
+    </div>
+    <div style="text-align:center">
+      <button class="btn-primary" onclick="goTo('screen-sector')">Démarrer la simulation →</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 2 : SECTOR -->
+  <div class="screen" id="screen-sector">
+    <p class="section-title">Quel est votre secteur cible ?</p>
+    <div class="sector-grid">
+      <div class="sector-card" onclick="selectSector('tech', this)">
+        <span class="icon">💻</span>
+        <strong>IT / Tech</strong>
+        <span>Développeur, chef de projet, consultant</span>
+      </div>
+      <div class="sector-card" onclick="selectSector('rh', this)">
+        <span class="icon">🤝</span>
+        <strong>RH / Conseil</strong>
+        <span>HRBP, recruteur, consultant RH</span>
+      </div>
+      <div class="sector-card" onclick="selectSector('commerce', this)">
+        <span class="icon">📊</span>
+        <strong>Commerce / Vente</strong>
+        <span>Commercial, account manager, BizDev</span>
+      </div>
+      <div class="sector-card" onclick="selectSector('general', this)">
+        <span class="icon">🎯</span>
+        <strong>Autre secteur</strong>
+        <span>Finance, marketing, administration…</span>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-primary" id="btn-start-chat" onclick="startChat()" disabled style="opacity:0.4">Commencer l'entretien →</button>
+      <button class="btn-secondary" onclick="goTo('screen-welcome')">Retour</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 3 : CHAT -->
+  <div class="screen" id="screen-chat">
+    <div class="progress-bar">
+      <div class="bar"><div class="bar-fill" id="progress-fill" style="width:25%"></div></div>
+      <span class="prog-label" id="prog-label">Question 1 / 4</span>
+    </div>
+    <div class="phase-tag" id="phase-tag">Présentation</div>
+    <div class="question-box">
+      <div class="recruiter-label">Le recruteur vous demande</div>
+      <p id="question-text"></p>
+    </div>
+    <div class="tip-box" id="tip-box">
+      <div class="tip-label">💡 Astuce recruteur</div>
+      <p id="tip-text"></p>
+    </div>
+    <textarea id="reponse" placeholder="Rédigez votre réponse ici... Soyez précis, structuré, et concret."></textarea>
+    <div class="char-count"><span id="char-count">0</span> mots</div>
+    <div class="btn-row">
+      <button class="btn-primary" onclick="validerReponse()">Valider ma réponse →</button>
+      <button class="btn-gold" onclick="toggleTip()">Voir l'astuce recruteur</button>
+      <button class="btn-secondary" onclick="restartAll()">Recommencer</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 4 : FEEDBACK INTERMÉDIAIRE -->
+  <div class="screen" id="screen-feedback">
+    <div class="phase-tag" id="fb-phase-tag">Feedback</div>
+    <div class="question-box" style="margin-bottom:1.25rem">
+      <div class="recruiter-label">Question posée</div>
+      <p id="fb-question"></p>
+    </div>
+    <div id="fb-boxes"></div>
+    <div class="model-answer">
+      <div class="ma-label">✓ Réponse modèle</div>
+      <p id="model-answer-text"></p>
+    </div>
+    <div class="btn-row">
+      <button class="btn-primary" id="btn-next-q" onclick="nextQuestion()">Question suivante →</button>
+      <button class="btn-secondary" onclick="restartAll()">Recommencer</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 5 : RÉSULTATS FINAUX -->
+  <div class="screen" id="screen-results">
+    <div class="results-header">
+      <h2>Votre bilan d'entretien</h2>
+      <p>Basé sur vos 4 réponses — feedback personnalisé</p>
+    </div>
+    <div class="global-score">
+      <div>
+        <div class="gs-label">Score global</div>
+        <div class="gs-val" id="score-global">--</div>
+      </div>
+      <div class="gs-verdict" id="verdict-text">--</div>
+    </div>
+    <div class="score-grid">
+      <div class="score-card">
+        <div class="sc-label">Clarté</div>
+        <div class="sc-val" id="sc-clarte">--</div>
+        <div class="sc-bar"><div class="sc-bar-fill" id="bar-clarte" style="width:0%"></div></div>
+      </div>
+      <div class="score-card">
+        <div class="sc-label">Structure</div>
+        <div class="sc-val" id="sc-structure">--</div>
+        <div class="sc-bar"><div class="sc-bar-fill" id="bar-structure" style="width:0%"></div></div>
+      </div>
+      <div class="score-card">
+        <div class="sc-label">Conviction</div>
+        <div class="sc-val" id="sc-conviction">--</div>
+        <div class="sc-bar"><div class="sc-bar-fill" id="bar-conviction" style="width:0%"></div></div>
+      </div>
+    </div>
+    <div class="conseils-section">
+      <h3>3 axes de progression</h3>
+      <div id="conseils-list"></div>
+    </div>
+    <div class="cta-section">
+      <p>Vous souhaitez aller plus loin ? Un accompagnement personnalisé avec une experte RH senior peut faire la différence.</p>
+      <a href="https://www.axe-rh-strategy.com/contact-prise-de-rendez-vous" target="_blank">Prendre rendez-vous →</a>
+    </div>
+    <div style="text-align:center;margin-top:1.5rem">
+      <button class="btn-secondary" onclick="restartAll()">Recommencer une simulation</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 <a href="https://www.axe-rh-strategy.com">Axe RH Strategy</a> — Coaching & Conseil RH</p>
+  </footer>
+</div>
+
+<script>
+const DATA = {
+  tech: {
+    phases: ["Présentation","Motivation","Compétences","Mise en situation"],
+    questions: [
+      "Présentez-vous en 2 minutes.",
+      "Pourquoi ce poste et cette entreprise vous intéressent-ils aujourd'hui ?",
+      "Décrivez un projet technique dont vous êtes particulièrement fier.",
+      "Votre délai est impossible à tenir et votre manager est injoignable. Que faites-vous ?"
+    ],
+    tips: [
+      "En France, la présentation doit être chronologique, sobre et orientée valeur. Évitez de tout raconter — sélectionnez ce qui est pertinent pour le poste.",
+      "Les recruteurs cherchent une cohérence entre votre parcours et ce choix. Montrez que vous avez fait des recherches sur l'entreprise.",
+      "Utilisez la méthode STAR : Situation, Tâche, Action, Résultat. Soyez précis sur votre rôle personnel, pas celui de l'équipe.",
+      "Ce type de question teste votre autonomie et votre gestion du stress. Le recruteur veut voir que vous prenez des initiatives sans dépasser vos attributions."
+    ],
+    models: [
+      "Je suis [prénom], [titre], avec X années d'expérience en [domaine]. J'ai travaillé chez [entreprise] sur [projet clé]. Ce qui me caractérise : [valeur professionnelle]. Aujourd'hui je cherche à [objectif clair].",
+      "J'ai analysé vos produits et vos offres récentes — [élément précis]. Ce qui m'attire ici, c'est [raison concrète liée à l'entreprise]. En parallèle, ce poste correspond exactement à ma trajectoire : [lien avec parcours].",
+      "Sur le projet [X], j'ai pris en charge [tâche précise]. Le défi était [obstacle]. J'ai choisi d'[action]. Le résultat : [résultat mesurable]. J'en ai tiré [enseignement].",
+      "Je commencerais par documenter l'état d'avancement, puis j'identifierais les risques immédiats. Je prendrais les décisions à ma portée, escaladerais les points bloquants par écrit, et alerterais mon N+2 si nécessaire. L'essentiel : ne pas laisser le projet dériver sans action."
+    ],
+    keywords: [
+      ["parcours","expérience","formation","projet","équipe","résultat"],
+      ["entreprise","poste","secteur","valeurs","motivation","choix"],
+      ["STAR","résultat","défi","solution","impact","livré"],
+      ["priorité","initiative","escalade","communication","décision","risque"]
+    ]
+  },
+  rh: {
+    phases: ["Présentation","Motivation","Expertise RH","Mise en situation"],
+    questions: [
+      "Présentez-vous en 2 minutes.",
+      "Qu'est-ce qui vous attire dans ce rôle RH au sein de notre organisation ?",
+      "Comment avez-vous géré un désaccord profond entre un manager et un membre de son équipe ?",
+      "Un collaborateur clé menace de démissionner. Comment réagissez-vous ?"
+    ],
+    tips: [
+      "En tant que profil RH, votre présentation doit refléter votre sens de la rigueur et de la communication. Structurez avec des faits, pas des impressions.",
+      "Les recruteurs RH attendent que vous parliez de leur culture, de leurs enjeux RH actuels — pas uniquement de vos besoins personnels.",
+      "Cette question teste votre posture de médiateur. Valorisez votre neutralité et votre sens de l'écoute avant toute chose.",
+      "Montrez que vous savez agir vite, écouter, et identifier les causes profondes — sans promettre l'impossible."
+    ],
+    models: [
+      "Je suis [prénom], RH Senior avec [X] ans d'expérience, spécialisé(e) en [domaine RH]. J'ai piloté [réalisation clé]. Ce qui m'anime : aligner les enjeux humains et les objectifs business.",
+      "Votre organisation est en [phase de croissance/transformation]. Les enjeux RH que vous traversez — recrutement, rétention, culture — correspondent exactement à mon expertise. Je souhaite contribuer concrètement à [axe spécifique].",
+      "J'ai organisé une médiation tripartite. J'ai d'abord recueilli les deux versions séparément, identifié le nœud réel du désaccord, puis proposé un accord sur des engagements concrets. Le suivi a été formalisé pour éviter la récidive.",
+      "Je demande un entretien immédiat, en écoute active, sans jugement. Je cherche à comprendre les causes réelles. Si c'est une question de reconnaissance ou d'évolution, je construis rapidement un plan d'action tangible avec le manager."
+    ],
+    keywords: [
+      ["RH","recrutement","formation","dialogue","social","équipe"],
+      ["culture","enjeux","organisation","valeurs","mission","contribution"],
+      ["médiation","écoute","conflit","accord","neutralité","suivi"],
+      ["rétention","écoute","causes","action","manager","évolution"]
+    ]
+  },
+  commerce: {
+    phases: ["Présentation","Motivation","Performance","Mise en situation"],
+    questions: [
+      "Présentez-vous en 2 minutes.",
+      "Pourquoi le secteur commercial vous motive-t-il au quotidien ?",
+      "Racontez votre meilleure négociation ou vente.",
+      "Un client stratégique vous annonce qu'il part chez un concurrent. Que faites-vous ?"
+    ],
+    tips: [
+      "En commerce, la présentation doit donner envie. Montrez votre énergie, vos résultats, et votre sens du client dès les premières phrases.",
+      "Le recruteur veut vérifier que vous êtes intrinsèquement motivé(e), pas juste attiré(e) par la rémunération variable.",
+      "Soyez très précis : montant, contexte, obstacle surmonté, résultat chiffré. Les flous inquiètent les recruteurs commerciaux.",
+      "Ne pas perdre son calme, qualifier les vraies raisons, proposer une dernière rencontre. Parfois une perte se transforme en victoire."
+    ],
+    models: [
+      "Je suis [prénom], commercial(e) avec [X] ans d'expérience. J'ai réalisé [CA ou objectif clé]. Ce qui me définit : la persévérance et la capacité à créer une relation de confiance durable avec mes clients.",
+      "Ce qui me motive, c'est le défi de convaincre, de créer de la valeur pour un client et de voir le résultat concret de mon travail. La relation commerciale est une relation humaine — c'est ça qui me porte.",
+      "J'ai négocié un contrat de [montant] avec [type de client]. Le frein principal était [obstacle]. J'ai proposé [solution sur mesure]. Résultat : signature en [délai], avec une relation qui dure depuis [durée].",
+      "Je demande un rendez-vous physique dès que possible. Je n'envoie pas d'email. Je qualifie les vraies raisons du départ, sans défensivité. Si c'est récupérable, je propose une offre adaptée. Sinon, je préserve la relation pour un retour futur."
+    ],
+    keywords: [
+      ["résultat","client","chiffre","vente","relation","performance"],
+      ["motivation","défi","humain","confiance","terrain","contact"],
+      ["négociation","contrat","obstacle","solution","résultat","chiffre"],
+      ["écoute","réaction","récupération","relation","proposition","calme"]
+    ]
+  },
+  general: {
+    phases: ["Présentation","Motivation","Compétences","Mise en situation"],
+    questions: [
+      "Présentez-vous en 2 minutes.",
+      "Pourquoi quittez-vous votre poste actuel ?",
+      "Quelle est votre principale force professionnelle ? Illustrez avec un exemple.",
+      "Vous devez livrer un projet urgent mais un membre clé de l'équipe est absent. Comment gérez-vous ?"
+    ],
+    tips: [
+      "Deux minutes maximum, structure chronologique, focus sur les expériences pertinentes pour le poste. Finissez par votre projet actuel.",
+      "Restez positif(ve) même si la réalité est difficile. Les recruteurs redoutent les personnes qui critiquent leurs anciens employeurs.",
+      "Choisissez une force vraiment distinctive et illustrez-la avec un exemple récent et concret. Évitez 'je suis rigoureux(se)'.",
+      "Montrez que vous êtes capable de prendre les rênes sans vous éparpiller. Priorisez, réorganisez, communiquez."
+    ],
+    models: [
+      "Je suis [prénom], [fonction] avec [X] ans d'expérience. Mon parcours m'a amené(e) de [entreprise A] à [entreprise B], où j'ai développé une expertise en [domaine]. Aujourd'hui je cherche à [objectif professionnel clair].",
+      "Je souhaite évoluer vers [type de mission]. Mon poste actuel m'a beaucoup apporté, mais je cherche maintenant [nouveauté / responsabilité / secteur]. Ce poste correspond exactement à cette étape.",
+      "Ma principale force est [compétence]. Par exemple, chez [entreprise], j'ai [situation] et j'ai réussi à [résultat] en [action]. Cela m'a confirmé que cette compétence est un levier réel pour une équipe.",
+      "Je commencerais par répartir les tâches critiques selon les disponibilités actuelles, en recentrant l'équipe sur le minimum viable. Je communiquerais de façon transparente au commanditaire du projet sur les ajustements nécessaires."
+    ],
+    keywords: [
+      ["parcours","expérience","formation","résultat","secteur","poste"],
+      ["évolution","opportunité","projet","compétence","positif","avenir"],
+      ["force","compétence","exemple","résultat","illustration","action"],
+      ["priorité","équipe","organisation","communication","livraison","plan"]
+    ]
+  }
+};
+
+let sector = null;
+let currentQ = 0;
+let scores = { clarte: [], structure: [], conviction: [] };
+let allAnswers = [];
+let showTip = false;
+
+function goTo(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function selectSector(s, el) {
+  sector = s;
+  document.querySelectorAll('.sector-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  const btn = document.getElementById('btn-start-chat');
+  btn.disabled = false;
+  btn.style.opacity = '1';
+}
+
+function startChat() {
+  currentQ = 0;
+  scores = { clarte: [], structure: [], conviction: [] };
+  allAnswers = [];
+  loadQuestion();
+  goTo('screen-chat');
+}
+
+function loadQuestion() {
+  const d = DATA[sector];
+  document.getElementById('question-text').innerText = d.questions[currentQ];
+  document.getElementById('phase-tag').innerText = d.phases[currentQ];
+  document.getElementById('prog-label').innerText = `Question ${currentQ+1} / 4`;
+  document.getElementById('progress-fill').style.width = `${(currentQ+1)*25}%`;
+  document.getElementById('tip-text').innerText = d.tips[currentQ];
+  document.getElementById('reponse').value = '';
+  document.getElementById('char-count').innerText = '0';
+  showTip = false;
+  document.getElementById('tip-box').classList.remove('visible');
+}
+
+document.getElementById('reponse').addEventListener('input', function() {
+  const words = this.value.trim().split(/\s+/).filter(w=>w.length>0).length;
+  document.getElementById('char-count').innerText = words;
+});
+
+function toggleTip() {
+  showTip = !showTip;
+  document.getElementById('tip-box').classList.toggle('visible', showTip);
+}
+
+function validerReponse() {
+  const rep = document.getElementById('reponse').value.trim();
+  if(rep.length < 20) { alert('Merci de rédiger une réponse avant de continuer.'); return; }
+  allAnswers.push(rep);
+  const feedback = evaluerReponse(rep, currentQ);
+  afficherFeedback(feedback);
+}
+
+function evaluerReponse(rep, qIndex) {
+  const d = DATA[sector];
+  const repLow = rep.toLowerCase();
+  const kws = d.keywords[qIndex];
+  const found = kws.filter(k => repLow.includes(k));
+  const score = Math.round((found.length / kws.length) * 100);
+  const words = rep.trim().split(/\s+/).length;
+  const clarte = words >= 60 ? Math.min(100, 60 + Math.round(Math.random()*20)) : Math.min(100, 30 + words);
+  const structure = rep.includes('.') && words > 40 ? Math.min(100, 55 + Math.round(Math.random()*25)) : 40;
+  const conviction = score >= 4 ? Math.min(100, 65 + Math.round(Math.random()*20)) : Math.min(100, 30 + score * 8);
+  scores.clarte.push(clarte);
+  scores.structure.push(structure);
+  scores.conviction.push(conviction);
+  const global = Math.round((clarte + structure + conviction) / 3);
+  let niveau, fbPositif, fbAxe;
+  if(global >= 70) {
+    niveau = 'good';
+    fbPositif = "Bonne réponse — structure solide et propos concret. Le recruteur a les éléments pour vous évaluer positivement.";
+    fbAxe = "Pour aller encore plus loin : ajoutez un chiffre ou un résultat mesurable si vous ne l'avez pas fait.";
+  } else if(global >= 45) {
+    niveau = 'warn';
+    fbPositif = "Réponse correcte mais perfectible. Les bases sont là, mais le recruteur manque encore d'éléments concrets pour se forger une opinion forte.";
+    fbAxe = words < 50 ? "Développez davantage : une réponse trop courte donne l'impression d'un manque de préparation." : "Structurez mieux votre propos : situation → action → résultat.";
+  } else {
+    niveau = 'bad';
+    fbPositif = "Réponse trop vague pour convaincre un recruteur. Vous devez aller au-delà des généralités.";
+    fbAxe = "Reprenez avec un exemple concret tiré de votre parcours. Le recruteur veut des faits, pas des intentions.";
+  }
+  return { niveau, fbPositif, fbAxe, model: d.models[qIndex], phase: d.phases[qIndex], question: d.questions[qIndex] };
+}
+
+function afficherFeedback(fb) {
+  document.getElementById('fb-phase-tag').innerText = fb.phase;
+  document.getElementById('fb-question').innerText = fb.question;
+  document.getElementById('model-answer-text').innerText = fb.model;
+  const boxes = `
+    <div class="feedback-box ${fb.niveau}">
+      <div class="fb-label">${fb.niveau==='good'?'✓ Points forts':fb.niveau==='warn'?'△ À améliorer':'✗ Points critiques'}</div>
+      <p>${fb.fbPositif}</p>
+    </div>
+    <div class="feedback-box warn">
+      <div class="fb-label">→ Axe de progression</div>
+      <p>${fb.fbAxe}</p>
+    </div>`;
+  document.getElementById('fb-boxes').innerHTML = boxes;
+  const btn = document.getElementById('btn-next-q');
+  if(currentQ >= 3) { btn.innerText = 'Voir mon bilan final →'; }
+  else { btn.innerText = 'Question suivante →'; }
+  goTo('screen-feedback');
+}
+
+function nextQuestion() {
+  currentQ++;
+  if(currentQ >= 4) { afficherResultats(); return; }
+  loadQuestion();
+  goTo('screen-chat');
+}
+
+function avg(arr) { return arr.length ? Math.round(arr.reduce((a,b)=>a+b,0)/arr.length) : 0; }
+
+function colorClass(v) { return v >= 70 ? 'good' : v >= 50 ? 'avg' : 'low'; }
+
+function afficherResultats() {
+  const cl = avg(scores.clarte);
+  const st = avg(scores.structure);
+  const cv = avg(scores.conviction);
+  const global = Math.round((cl + st + cv) / 3);
+  let verdict, conseils;
+  if(global >= 70) {
+    verdict = "Profil convaincant. Vous avez les bases pour aborder sereinement un entretien en France. Continuez à travailler la précision de vos exemples.";
+    conseils = [
+      "Renforcez vos réponses avec des résultats mesurables — un chiffre précis a 3× plus d'impact qu'une description qualitative.",
+      "Travaillez votre phrase d'accroche : les 30 premières secondes d'une présentation déterminent souvent l'impression globale.",
+      "Entraînez-vous à l'oral — les réponses écrites et orales mobilisent des compétences différentes."
+    ];
+  } else if(global >= 50) {
+    verdict = "Profil en progression. Les fondamentaux sont présents mais vos réponses manquent encore de précision et de structure pour convaincre un recruteur exigeant.";
+    conseils = [
+      "Adoptez systématiquement la méthode STAR (Situation, Tâche, Action, Résultat) pour chaque exemple de votre parcours.",
+      "Préparez 5 à 6 situations-clés de votre carrière que vous pouvez adapter à n'importe quelle question.",
+      "Travaillez votre posture sur les questions difficiles (faiblesse, départ, échec) — elles révèlent votre maturité professionnelle."
+    ];
+  } else {
+    verdict = "Des axes de travail importants ont été identifiés. Avec une préparation ciblée, vous pouvez rapidement progresser et gagner en confiance.";
+    conseils = [
+      "Commencez par préparer votre présentation — c'est la question la plus prévisible et la plus structurante.",
+      "Listez vos 3 réalisations majeures avec des faits concrets, avant tout autre entretien.",
+      "Un accompagnement personnalisé peut accélérer significativement votre progression en quelques séances."
+    ];
+  }
+  document.getElementById('score-global').innerText = global + '/100';
+  document.getElementById('verdict-text').innerText = verdict;
+  ['clarte','structure','conviction'].forEach(key => {
+    const val = key==='clarte'?cl:key==='structure'?st:cv;
+    const cc = colorClass(val);
+    document.getElementById('sc-'+key).innerText = val + '/100';
+    document.getElementById('sc-'+key).className = 'sc-val ' + cc;
+    document.getElementById('bar-'+key).style.width = val + '%';
+    document.getElementById('bar-'+key).className = 'sc-bar-fill ' + cc;
+  });
+  document.getElementById('conseils-list').innerHTML = conseils.map((c,i)=>`
+    <div class="conseil-item">
+      <div class="conseil-num">${i+1}</div>
+      <p>${c}</p>
+    </div>`).join('');
+  setTimeout(() => {
+    ['clarte','structure','conviction'].forEach(key => {
+      const val = key==='clarte'?cl:key==='structure'?st:cv;
+      document.getElementById('bar-'+key).style.width = val + '%';
+    });
+  }, 100);
+  goTo('screen-results');
+}
+
+function restartAll() {
+  sector = null;
+  currentQ = 0;
+  scores = { clarte: [], structure: [], conviction: [] };
+  allAnswers = [];
+  document.querySelectorAll('.sector-card').forEach(c => c.classList.remove('selected'));
+  const btn = document.getElementById('btn-start-chat');
+  btn.disabled = true;
+  btn.style.opacity = '0.4';
+  goTo('screen-welcome');
+}
+</script>
+</body>
+</html>
